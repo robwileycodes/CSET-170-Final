@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSET 170 Final</title>
+    <link rel="stylesheet" href="static/styles/style.css">
+</head>
+<body>
+    <header>
+        <h2>Bank</h2>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/balance">View Balance</a></li>
+            <li><a href="/transfer">Transfers</a></li>
+        </ul>
+    </nav>
+    <main>
+        <div class="home-btns">
+            <a onclick="signup()" class="signup">Sign Up</a>
+            <a onclick="login()" class="login">Log In</a>
+        </div>
+        <div>
+            <form action="/signup" method="POST" id="signup">
+                <input type="text" name="fName" placeholder="First Name" class="input_field" required><br>
+                <input type="text" name="lName" placeholder="Last Name" class="input_field" required><br>
+                <input type="text" name="SSN" placeholder="SSN" class="input_field" required><br>
+                <input type="text" name="address" placeholder="Address" class="input_field" required><br>
+                <input type="text" name="phoneNum" placeholder="Phone Number" class="input_field" required><br>
+                <input type="password" name="pw" placeholder="Password" class="input_field" required><br>
+                <input type="submit" value="Submit" class="input_submit">
+            </form>
+            {% if error %}
+                <p class="center-txt error">{{ error }}</p>
+            {% endif %}
+            {% if success %}
+                <p class="center-txt success">{{ success }}</p>
+            {% endif %}
+        </div>
+        
+        <div>
+            <form action="/login" method="POST" class="login-form" id="login">
+                <input type="text" name="SSN" placeholder="SSN" class="input_field" required><br>
+                <input type="password" name="pw" placeholder="Password" class="input_field" required><br>
+                <input type="submit" value="Log In" class="input_submit">
+            </form>
+            {% if login_error %}
+                <p class="error">{{ login_error }}</p>
+            {% endif %}
+        </div>
+    </main>
+    <footer>
+        <h2>By Rob Wiley and Michael Whiteley</h2>
+    </footer>
+    <script src="static/scripts/script.js"></script>
+</body>
+</html>

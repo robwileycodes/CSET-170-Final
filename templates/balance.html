@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSET 170 Final</title>
+    <link rel="stylesheet" href="static/styles/style.css">
+</head>
+<body>
+    <header>
+        <h2>Bank</h2>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/balance">View Balance</a></li>
+            <li><a href="/transfer">Transfers</a></li>
+        </ul>
+    </nav>
+    <main>
+        <h2>Welcome, {{ user.fName}}</h2>
+        <h2>Account Number: {{ user.accNum}}</h2>
+        <h1 class="center-txt">Your Balance: ${{ user['balance'] }}</h1>
+        <div class="home-btns">
+            <a onclick="deposit()">Make a Deposit</a>
+            <a onclick="withdraw()">Withdraw Money</a>
+        </div>
+        <div>
+            <form action="/deposit" method="POST" id="deposit">
+                <label for="card_number">Card Number</label> 
+                <input type="text" id="card_number" name="card_number" placeholder="1234 5678 9012 3456" maxlength="19" required>
+
+                <label for="exp">Expiration Date</label> 
+                <input type="number" id="exp" name="exp" required>
+
+                <label for="cvv">CVV</label> 
+                <input type="password" id="cvv" name="cvv" maxlength="4" required>
+
+                <label for="depositAmt">Amount to Deposit ($)</label>
+                <input type="number" id="depositAmt" name="depositAmt" min="1" required>
+
+                <input type="submit" value="Submit" class="input_submit">
+            </form>
+        </div>
+        <div>
+            <form action="/withdraw" method="POST" id="withdraw">
+                <label for="card_number">Card Number</label> 
+                <input type="text" id="card_number" name="card_number" placeholder="1234 5678 9012 3456" maxlength="19" required>
+
+                <label for="exp">Expiration Date</label> 
+                <input type="number" id="exp" name="exp" required>
+
+                <label for="cvv">CVV</label> 
+                <input type="password" id="cvv" name="cvv" maxlength="4" required>
+
+                <label for="withdrawAmt">Amount to Withdraw($)</label>
+                <input type="number" id="withdrawAmt" name="withdrawAmt" min="1" required>
+
+                <input type="submit" value="Submit" class="input_submit">
+            </form>
+        </div>
+        {% if error %}
+            <p class="center-txt error">{{ error }}</p>
+        {% endif %}
+        {% if success %}
+            <p class="center-txt success">{{ success }}</p>
+        {% endif %}
+    </main>
+    <footer>
+        <h2>By Rob Wiley and Michael Whiteley</h2>
+    </footer>
+<script src="static/scripts/script.js"></script>
+</body>
+</html>

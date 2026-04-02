@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSET 170 Final</title>
+    <link rel="stylesheet" href="static/styles/style.css">
+</head>
+<body>
+    <header>
+        <h2>Bank</h2>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/balance">View Balance</a></li>
+            <li><a href="/transfer">Transfers</a></li>
+        </ul>
+    </nav>
+    <main>
+        <h1>Admin — Pending Approvals</h1>
+        {% if pending_users %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>SSN</th>
+                        <th>Address</th>
+                        <th>Phone</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in pending_users %}
+                    <tr>
+                        <td>{{ user['fName'] }}</td>
+                        <td>{{ user['lName'] }}</td>
+                        <td>{{ user['SSN'] }}</td>
+                        <td>{{ user['address'] }}</td>
+                        <td>{{ user['phoneNum'] }}</td>
+                        <td>
+                            <form action="/admin/approve/{{ user['SSN'] }}" method="POST" class="action-form">
+                                <input type="submit" value="Approve" class="input_submit">
+                            </form>
+                            <form action="/admin/deny/{{ user['SSN'] }}" method="POST" class="action-form">
+                                <input type="submit" value="Deny" class="input_submit">
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No pending signups.</p>
+        {% endif %}
+    </main>
+    <footer>
+        <h2>By Rob Wiley and Michael Whiteley</h2>
+    </footer>
+</body>
+</html>
